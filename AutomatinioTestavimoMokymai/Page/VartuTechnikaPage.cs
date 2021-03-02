@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutomatinioTestavimoMokymai.Page
 {
-    class VartuTechnikaPage: BasePage
+    public class VartuTechnikaPage: BasePage
     {
         private static IWebDriver _driver;
         private IWebElement _inputField1 => _driver.FindElement(By.Id("doors_width"));

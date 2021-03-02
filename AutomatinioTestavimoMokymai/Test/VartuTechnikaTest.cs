@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutomatinioTestavimoMokymai.Test
 {
-    class VartuTechnikaTest
+    public class VartuTechnikaTest
     {
         private static IWebDriver _driver;
 
