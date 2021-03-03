@@ -12,31 +12,49 @@ namespace AutomatinioTestavimoMokymai.Test
 {
     public class SeleniumCheckBoxTest
     {
-        private static IWebDriver _driver;
+        private static SeleniumCheckBoxPage _page;
 
         [OneTimeSetUp]
         public static void Setup()
         {
-            _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl("https://www.seleniumeasy.com/test/basic-checkbox-demo.html");
+            IWebDriver driver = new ChromeDriver();
+            _page = new SeleniumCheckBoxPage(driver);
+
             //Bet kuriam elementui laukiame 10s
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            _driver.Manage().Window.Maximize();
-            //_driver.FindElement(By.Id("cookiescript_reject")).Click();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Window.Maximize();
         }
         [OneTimeTearDown]
         public static void TearDown()
         {
-            _driver.Quit();
+            _page.CloseBrowser();
         }
-        [TestCase(false, "Success - Check box is checked", TestName = "Check one check box")]
+        [Order(1)]
+        [TestCase("Success - Check box is checked", TestName = "Check one check box")]
 
-
-        public static void TestOneCheckBox(bool check, string text)
+        public static void TestOneCheckBox(string text)
         {
-            SeleniumCheckBoxPage page = new SeleniumCheckBoxPage(_driver);
-            page.CheckOneCheckBox(check);
-            page.CheckResult(text);
+            _page.CheckOneCheckBox();
+            _page.CheckResult(text);
+        }
+
+        [Order(2)]
+        [TestCase("Uncheck All", TestName = "Check all check box")]
+        public static void TestsMultipleCheckBoxAllCheck(string text)
+        {
+            _page.UncheckOneCheckBox();
+            _page.CheckMultipleCheckBox();
+            TestContext.Out.WriteLine(text);
+            _page.CheckMultipleBottonResult(text);
+        }
+
+        [Order(3)]
+        [TestCase("Check All", TestName = "Uncheck all check box")]
+        public static void TestsMultipleCheckBoxAllUncheck(string text)
+        {
+            _page.UncheckOneCheckBox();
+            _page.UncheckMultipleCheckBox();
+            _page.CheckMultipleBottonResult(text);
         }
     }
 }
