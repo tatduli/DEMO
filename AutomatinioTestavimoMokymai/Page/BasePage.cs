@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomatinioTestavimoMokymai
+namespace AutomatinioTestavimoMokymai.Page
 {
     public class BasePage
     {

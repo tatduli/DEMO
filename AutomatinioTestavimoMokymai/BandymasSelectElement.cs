@@ -30,5 +30,6 @@ namespace AutomatinioTestavimoMokymai
             select_elem.SelectByText("on IE6");
         }
 
+
     }
 }
