@@ -17,10 +17,19 @@ namespace AutomatinioTestavimoMokymai.Page
         private SelectElement _cityDropdown => new SelectElement(Driver.FindElement(By.Id("city")));
         private IWebElement _resultField => Driver.FindElement(By.CssSelector("#mortgageCalculatorStep2 > div.row > div > div:nth-child(5) > div > span > strong"));
         private IWebElement _reklama => Driver.FindElement(By.Id("seb-bot-closeIcn"));
+        private WebDriverWait wait => new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+        private IWebElement cookies => Driver.FindElement(By.CssSelector(".accept-selected > span"));
 
         public SebPage(IWebDriver webDriver) : base(webDriver)
+        {           
+        }
+
+        public SebPage NavigateToDefaultPage()
         {
-            Driver.Navigate().GoToUrl(UrlAddress);
+            if (Driver.Url != UrlAddress)
+                Driver.Url = UrlAddress;
+            return this;
         }
 
         
@@ -51,6 +60,13 @@ namespace AutomatinioTestavimoMokymai.Page
         public void ChlickOnResultBotton()
         {
             _calculateButton.Click();
+        }
+
+        public void CloseCookies()
+        {
+            //Iššokančiam langui laukiame kol jis pasirodys ir paspaudžiame ant X           
+            wait.Until(item => cookies.Displayed);
+            cookies.Click();
         }
         public void VerifyResult(int norimaPaskola)
         {

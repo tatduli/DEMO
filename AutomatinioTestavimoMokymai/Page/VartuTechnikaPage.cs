@@ -11,14 +11,22 @@ namespace AutomatinioTestavimoMokymai.Page
 {
     public class VartuTechnikaPage: BasePage
     {
-        private static IWebDriver _driver;
-        private IWebElement _inputField1 => _driver.FindElement(By.Id("doors_width"));
-        private IWebElement _inputField2 => _driver.FindElement(By.Id("doors_height"));
-        private IWebElement _checkAuto => _driver.FindElement(By.Id("automatika"));
-        private IWebElement _checkWork => _driver.FindElement(By.Id("darbai"));
-        private IWebElement _botton => _driver.FindElement(By.Id("calc_submit"));
-        private IWebElement _resultFromPage => _driver.FindElement(By.CssSelector("#calc_result > div"));
+        private const string UrlAddress = "http://vartutechnika.lt/";
+        private IWebElement _inputField1 => Driver.FindElement(By.Id("doors_width"));
+        private IWebElement _inputField2 => Driver.FindElement(By.Id("doors_height"));
+        private IWebElement _checkAuto => Driver.FindElement(By.Id("automatika"));
+        private IWebElement _checkWork => Driver.FindElement(By.Id("darbai"));
+        private IWebElement _botton => Driver.FindElement(By.Id("calc_submit"));
+        private IWebElement _resultFromPage => Driver.FindElement(By.CssSelector("#calc_result > div"));
+
         public VartuTechnikaPage(IWebDriver webDriver) : base(webDriver) { }
+
+        public VartuTechnikaPage NavigateToDefaultPage()
+        {
+            if (Driver.Url != UrlAddress)
+                Driver.Url = UrlAddress;
+            return this;
+        }
 
         public VartuTechnikaPage InsertWidth(string width)
         {
@@ -70,7 +78,7 @@ namespace AutomatinioTestavimoMokymai.Page
         }
         private VartuTechnikaPage WaitForResult()
         {
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(d => _resultFromPage.Displayed);
             return this;
         }

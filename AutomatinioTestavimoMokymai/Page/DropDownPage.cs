@@ -22,10 +22,15 @@ namespace AutomatinioTestavimoMokymai.Page
         private IWebElement _getAllSelectedBotton => Driver.FindElement(By.Id("printAll"));
         private IWebElement _getOptionSelectedResult => Driver.FindElement(By.CssSelector(".getall-selected"));
 
-       
+
         public DropDownPage(IWebDriver webDriver) : base(webDriver)
         {
-            Driver.Navigate().GoToUrl(UrlAddress);
+        }
+
+        public void NavigateToDefaultPage()
+        {
+            if (Driver.Url != UrlAddress)
+                Driver.Url = UrlAddress;            
         }
 
         public DropDownPage SelectFromByText(string text)
