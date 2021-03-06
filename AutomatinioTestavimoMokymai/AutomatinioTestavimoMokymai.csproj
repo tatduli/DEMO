@@ -56,15 +56,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BandymasSelectElement.cs" />
-    <Compile Include="BasePage\BasePage.cs" />
     <Compile Include="CheckBox.cs" />
     <Compile Include="HW2_1.cs" />
+    <Compile Include="Page\BasePage.cs" />
+    <Compile Include="Page\DropDownPage.cs" />
+    <Compile Include="Page\SebPage.cs" />
     <Compile Include="Page\SeleniumCheckBoxPage.cs" />
     <Compile Include="Page\SeleniumInputPage.cs" />
     <Compile Include="Page\VartuTechnikaPage.cs" />
     <Compile Include="PirmasUzsiemimas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestWebDriver.cs" />
+    <Compile Include="Test\DropDownTest.cs" />
+    <Compile Include="Test\SebTest.cs" />
     <Compile Include="Test\SeleniumCheckBoxTest.cs" />
     <Compile Include="Test\SeleniumInputTest.cs" />
     <Compile Include="Test\VartuTechnikaTest.cs" />
