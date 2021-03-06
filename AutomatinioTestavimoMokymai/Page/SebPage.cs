@@ -24,7 +24,10 @@ namespace AutomatinioTestavimoMokymai.Page
         }
 
         
-
+        public void FocusOnFrame()
+        {
+            Driver.SwitchTo().Frame(0);
+        }
 
         public void Pajamos(string income)
         {           
@@ -45,13 +48,16 @@ namespace AutomatinioTestavimoMokymai.Page
             _cityDropdown.SelectByText(text);            
         }
 
-        public void VerifyResult()
+        public void ChlickOnResultBotton()
         {
-            string text = _resultField.Text;
-            Console.WriteLine(_resultField.Text);
-            var resultSum = Regex.Match(text, @"\d+").Value;
-            Console.WriteLine(resultSum);
-            //Assert.GreaterOrEqual(), $"Result is wrong, not {selectedDay}");
+            _calculateButton.Click();
+        }
+        public void VerifyResult(int norimaPaskola)
+        {
+            int result = Convert.ToInt32(_resultField.Text.Replace(" ",""));           
+           // var resultSum = Regex.Match(text, @"\d+").Value;
+            Console.WriteLine(result);
+            Assert.GreaterOrEqual(result, norimaPaskola, $"Result is wrong, not {result}");
         }
     }
 }

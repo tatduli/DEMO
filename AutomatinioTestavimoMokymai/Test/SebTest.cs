@@ -27,27 +27,29 @@ namespace AutomatinioTestavimoMokymai.Test
             driver.Manage().Window.Maximize();
             //Iššokančiam langui laukiame kol jis pasirodys ir paspaudžiame ant X
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //IWebElement popUp = driver.FindElement(By.Id("_reklama"));
-            //wait.Until(item => popUp.Displayed);
-            //popUp.Click();
+           
             IWebElement cookies = driver.FindElement(By.CssSelector(".accept-selected > span"));
             wait.Until(item => cookies.Displayed);
             cookies.Click();
+           
 
         }
         [OneTimeTearDown]
         public static void TearDown()
         {
-            _page.CloseBrowser();
+            //_page.CloseBrowser();
         }
 
-        [TestCase("1000", "0", "Klaipėda", TestName = "Ar duos paskolą")]
-        public static void TestArDuosPaskola(string pajamos, string isipareigojimai, string miestas)
+        [TestCase("1000", "0", "Klaipėda", "75000", TestName = "Ar duos paskolą")]
+        public static void TestArDuosPaskola(string pajamos, string isipareigojimai, string miestas, int paskola)
         {
+
+            _page.FocusOnFrame();
             _page.Pajamos(pajamos);
             _page.Isipareigojimais(isipareigojimai);
             _page.SelectFromByText(miestas);
-            _page.VerifyResult();
+            _page.ChlickOnResultBotton();
+            _page.VerifyResult(paskola);
 
         }
 
